@@ -13,11 +13,11 @@ data ParseError
 
 parse :: String -> Either ParseError Program
 parse = continue err (first err' . P.parse) . L.lex
-  where
-    err (L.Unexpected c) = UnexpectedCharacter c
-    err L.UnexpectedEOF = UnexpectedEOF
-    err' (P.Unexpected t) = UnexpectedToken $ show t
-    err' P.UnexpectedEOF = UnexpectedEOF
+ where
+  err (L.Unexpected c) = UnexpectedCharacter c
+  err L.UnexpectedEOF = UnexpectedEOF
+  err' (P.Unexpected t) = UnexpectedToken $ show t
+  err' P.UnexpectedEOF = UnexpectedEOF
 
 continue :: (a -> c) -> (b -> Either c d) -> Either a b -> Either c d
 continue ac _ (Left a) = Left $ ac a

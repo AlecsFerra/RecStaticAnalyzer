@@ -11,8 +11,8 @@ import Control.Arrow (Arrow (first))
 --  It parses elements of type @p@ while reading a stream of
 --  type @s@, it can return @e@ as an error.
 newtype Parser s e p = Parser
-  { -- | The parsing function
-    runParser :: s -> Either e (p, s)
+  { runParser :: s -> Either e (p, s)
+  -- ^ The parsing function
   }
 
 -- | An error @e@ that can be constructed from a stream @s@.

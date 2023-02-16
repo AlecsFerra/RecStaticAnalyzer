@@ -1,11 +1,11 @@
-module Data.Lattice
-  ( MeetSemiLattice (..),
-    JoinSemiLattice (..),
-    BoundedMeetSemiLattice (..),
-    BoundedJoinSemiLattice (..),
-    Lattice,
-    BoundedLattice
-  )
+module Data.Lattice (
+  MeetSemiLattice (..),
+  JoinSemiLattice (..),
+  BoundedMeetSemiLattice (..),
+  BoundedJoinSemiLattice (..),
+  Lattice,
+  BoundedLattice,
+)
 where
 
 import Data.Poset (Poset)

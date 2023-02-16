@@ -1,7 +1,7 @@
 module Language.Compile (compile) where
 
-import qualified Parsing.Parser.Syntax as P (Declaration (..), Expression (..), Operator (..), Program (..))
 import qualified Language.Syntax as S (Expression (..), FunctionDefinition (..), FunctionIdentifier (..), Program (..), VariableIdentifier (..))
+import qualified Parsing.Parser.Syntax as P (Declaration (..), Expression (..), Operator (..), Program (..))
 
 compile :: P.Program -> S.Program
 compile (P.Program declarations) = S.Program $ compileDefinition <$> declarations

@@ -1,7 +1,7 @@
-module Data.AbstractDomain
-  ( ShouldContinue (..),
-    AbstractDomain (..),
-  )
+module Data.AbstractDomain (
+  ShouldContinue (..),
+  AbstractDomain (..),
+)
 where
 
 import Data.Lattice (BoundedLattice)

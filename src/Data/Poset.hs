@@ -1,6 +1,6 @@
-module Data.Poset
-  ( Poset (..),
-  )
+module Data.Poset (
+  Poset (..),
+)
 where
 
 import Prelude hiding ((<=))

@@ -2,7 +2,7 @@
 {-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE StandaloneDeriving #-}
 
-module Analysis.Environment (
+module Environment (
     Environment,
     lookup,
     insert,
