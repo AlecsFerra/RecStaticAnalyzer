@@ -1,0 +1,5 @@
+const(x, y) = x
+
+flipconst(x, y) = const(y, x)
+
+constapp(y, x) = flipconst(x + y, 10)

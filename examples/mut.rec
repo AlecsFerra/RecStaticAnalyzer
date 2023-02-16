@@ -1,0 +1,13 @@
+sign(x) = if x then 0 else signrec(x, x)
+
+signrec(pos, neg) = if pos then
+   1
+   else if neg
+           then -1
+           else signrec(pos - 1, neg + 1)
+
+lte(x, y) = if sign(x - y) - 1 then 1 else 0
+
+a(x) = if lte(x, 0) then b(x - 1) else c(x - 1)
+b(x) = if lte(x, 0) then a(x - 1) else c(x - 1)
+c(x) = if lte(x, 0) then a(x - 1) else b(x - 1)

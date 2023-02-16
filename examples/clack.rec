@@ -1,0 +1,17 @@
+sign(x) = if x then 0 else signrec(x, x)
+
+signrec(pos, neg) = if pos then
+   1
+   else if neg
+           then -1
+           else signrec(pos - 1, neg + 1)
+
+lte(x, y) = if sign(x - y) - 1 then 1 else 0
+
+g(p, q, r) = if lte(p, 0) then q + r else q + p
+
+f(x, y) = if lte(x, 0) then y else f(x - 1, y)
+
+ftwo(x, y, z) = if lte(y, 0) then ftwo(0, 1, x) else x
+
+fthree(x, y, z, p) = if lte(p, 0) then x + y else fthree(y, 0, 0, (p - 1)) + fthree(z, z, 0, p - 1)
