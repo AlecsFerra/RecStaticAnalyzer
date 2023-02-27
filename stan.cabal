@@ -25,13 +25,14 @@ source-repository head
 
 library
   exposed-modules:
-      Analysis.Naive
-      Analysis.StrictnessResults
-      Data.AbstractDomain
-      Data.AbstractSemantics
+      Analysis.Analysis
+      Analysis.FunctionSemantics
+      Data.Finite
       Data.Lattice
       Data.Poset
+      Data.ValueSemantics
       Domain.Strictness
+      Domain.StrictnessResults
       Environment
       Language.Check
       Language.Compile

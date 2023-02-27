@@ -2,7 +2,8 @@
 
 module Main (main) where
 
-import Analysis.Naive (eval)
+import Analysis.Analysis (run)
+import Domain.StrictnessResults (makeResults)
 import Control.Exception (IOException, catch)
 import Language.Check (checkProgram)
 import Language.Compile (compile)
@@ -12,6 +13,7 @@ import System.Environment (getArgs, getProgName)
 import System.Exit (exitFailure)
 import Text.Printf (printf)
 import Prelude hiding (error, fail)
+import Domain.Strictness (strictnessValueSemantics)
 
 error :: Bool -> String -> IO ()
 error True msg = fail msg
@@ -35,4 +37,4 @@ main = do
 
   either (fail . prettyCheckError sourceName) pure $ checkProgram compiled
 
-  putStrLn $ prettyStrictnessResult $ eval compiled
+  putStrLn $ prettyStrictnessResult $ makeResults $ run strictnessValueSemantics compiled

@@ -6,7 +6,7 @@ module Pretty (
   prettyParseError,
 ) where
 
-import Analysis.StrictnessResults (ArgumentStrictness (..), StrictnessResults (..))
+import Domain.StrictnessResults (ArgumentStrictness (..), StrictnessResults (..))
 import Data.List (intercalate)
 import Domain.Strictness (Strictness (..))
 import Language.Check (CheckError (..))

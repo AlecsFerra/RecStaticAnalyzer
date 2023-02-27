@@ -2,9 +2,11 @@
 
 module Domain.Strictness (
   Strictness (..),
+  strictnessValueSemantics,
 )
 where
 
+import Data.Finite (Finite (..))
 import Data.Lattice (
   BoundedJoinSemiLattice (..),
   BoundedLattice,
@@ -14,6 +16,7 @@ import Data.Lattice (
   MeetSemiLattice (..),
  )
 import Data.Poset (Poset (..))
+import Data.ValueSemantics (ValueSemantics (..))
 
 -- | Two point latice describing the strictness
 data Strictness
@@ -49,3 +52,14 @@ instance BoundedJoinSemiLattice Strictness where
 instance Lattice Strictness
 
 instance BoundedLattice Strictness
+
+instance Finite Strictness where
+  all = [Lazy, Strict]
+
+strictnessValueSemantics :: ValueSemantics Strictness
+strictnessValueSemantics =
+  ValueSemantics
+    { literal = const top
+    , (*#) = (/\)
+    , (+#) = (/\)
+    }

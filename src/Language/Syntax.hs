@@ -20,7 +20,7 @@ data Expression
   | Multiplication Expression Expression
   | Conditional Expression Expression Expression
   | Application FunctionIdentifier [Expression]
-  deriving (Show)
+  deriving (Show, Eq)
 
 data FunctionDefinition = FunctionDefinition FunctionIdentifier [VariableIdentifier] Expression
   deriving (Show)
