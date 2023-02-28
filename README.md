@@ -2,7 +2,7 @@
 
 An abstract interpretation based strictness analyzer for the REC programming language described in the 9th chapter of the book “The formal semantics of programming languages” by G. Winskel, The MIT Press, 1993..
 
-The interpreter leverages a 2 point lattice (`Strict ≥ Lazy`) to aproximate the strictness of the paremter of the functions.
+The interpreter leverages a 2 point lattice (`Strict ≥ Lazy`) (isomorphic to the boolean lattice) obviously is an approximation.
 
 A parameter is said strict when we have that `pₖ = ⊥ ⇒ f p₁ ... pₙ ... pₖ  = ⊥  ∀ p₁ ... pₖ`.
 When a parameter is strict is safe to perform his evaluation before the call to the function f thus making the interpretation of the program more efficient.
