@@ -17,8 +17,8 @@ import Data.Lattice (
  )
 import Data.Poset (Poset (..))
 import Data.ValueSemantics (ValueSemantics (..))
-import Language.Syntax (Expression, VariableIdentifier)
 import Environment (Environment)
+import Language.Syntax (Expression, VariableIdentifier)
 
 -- | Two point latice describing the strictness
 data Strictness

@@ -1,7 +1,7 @@
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE ImportQualifiedPost #-}
 
 module Parsing.Parser.Parser (parse, ParsingError (..)) where
 
