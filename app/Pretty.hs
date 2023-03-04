@@ -2,13 +2,16 @@
 
 module Pretty (
   prettyStrictnessResult,
+  prettySignResult,
   prettyCheckError,
   prettyParseError,
 ) where
 
-import Domain.StrictnessResults (ArgumentStrictness (..), StrictnessResults (..))
 import Data.List (intercalate)
+import Domain.Sign (Sign (..))
+import Domain.SignResults (SignResults (..))
 import Domain.Strictness (Strictness (..))
+import Domain.StrictnessResults (ArgumentStrictness (..), StrictnessResults (..))
 import Language.Check (CheckError (..))
 import Language.Syntax (FunctionIdentifier (..), VariableIdentifier (..))
 import Parsing.Parser (ParseError (..))
@@ -16,25 +19,40 @@ import Text.Printf (printf)
 
 prettyStrictnessResult :: StrictnessResults -> String
 prettyStrictnessResult (StrictnessResults defs) = intercalate "\n" $ fmap prettyDefinition defs
+ where
+  prettyDefinition (id, args) = printf "%s(%s)" (prettyFunctionId id) (prettyArgs args)
 
-prettyDefinition :: (FunctionIdentifier, ArgumentStrictness) -> String
-prettyDefinition (id, args) = printf "%s(%s)" (prettyFunctionId id) (prettyArgs args)
+  prettyArgs (ArgumentStrictness args) = intercalate ", " $ fmap prettyArg args
 
-prettyArgs :: ArgumentStrictness -> String
-prettyArgs (ArgumentStrictness args) = intercalate ", " $ fmap prettyArg args
+  prettyArg (id, s) = printf "%s %s" (prettyStrictness s) (prettyVariableId id)
 
-prettyArg :: (VariableIdentifier, Strictness) -> String
-prettyArg (id, s) = printf "%s %s" (prettyStrictness s) (prettyVariableId id)
+  prettyStrictness Strict = "S"
+  prettyStrictness Lazy = "L"
+
+prettySignResult :: SignResults -> String
+prettySignResult (SignResults defs) = intercalate "\n" $ fmap prettyDefinition defs
+ where
+  prettyDefinition (id, args, res) =
+    printf
+      "%s(%s) %s"
+      (prettyFunctionId id)
+      (intercalate ", " $ fmap prettyVariableId args)
+      (prettySign res)
+
+  prettySign Bottom = "= ⊥"
+  prettySign NonZero = "≠ 0"
+  prettySign EqualZero = "= 0"
+  prettySign GreaterZero = "> 0"
+  prettySign GreaterEqZero = "≥ 0"
+  prettySign LowerZero = "< 0"
+  prettySign LowerEqZero = "≤ 0"
+  prettySign Top = "= any"
 
 prettyFunctionId :: FunctionIdentifier -> String
 prettyFunctionId (FunctionIdentifier id) = id
 
 prettyVariableId :: VariableIdentifier -> String
 prettyVariableId (VariableIdentifier id) = id
-
-prettyStrictness :: Strictness -> String
-prettyStrictness Strict = "S"
-prettyStrictness Lazy = "L"
 
 prettyParseError :: String -> ParseError -> String
 prettyParseError fileName error = printf "Error while parsing '%s': %s" fileName $ pretty error

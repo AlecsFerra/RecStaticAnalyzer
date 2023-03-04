@@ -56,13 +56,13 @@ instance (Ord k, MeetSemiLattice v) => MeetSemiLattice (Environment k v) where
     e1 /\ e2 = allWith e1 e2 (/\)
 
 instance (Ord k, BoundedMeetSemiLattice v) => BoundedMeetSemiLattice (Environment k v) where
-    bottom = fromDefault (const bottom)
+    top = fromDefault (const top)
 
 instance (Ord k, JoinSemiLattice v) => JoinSemiLattice (Environment k v) where
     e1 \/ e2 = allWith e1 e2 (\/)
 
 instance (Ord k, BoundedJoinSemiLattice v) => BoundedJoinSemiLattice (Environment k v) where
-    top = fromDefault (const top)
+    bottom = fromDefault (const bottom)
 
 instance (Ord k, Lattice v) => Lattice (Environment k v)
 

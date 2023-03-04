@@ -14,13 +14,13 @@ class Poset a => MeetSemiLattice a where
   (/\) :: a -> a -> a
 
 class MeetSemiLattice a => BoundedMeetSemiLattice a where
-  bottom :: a
+  top :: a
 
 class Poset a => JoinSemiLattice a where
   (\/) :: a -> a -> a
 
 class JoinSemiLattice a => BoundedJoinSemiLattice a where
-  top :: a
+  bottom :: a
 
 class (MeetSemiLattice a, JoinSemiLattice a) => Lattice a
 

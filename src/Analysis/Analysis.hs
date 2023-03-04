@@ -8,7 +8,7 @@ import Control.Arrow (Arrow (..))
 import Data.Finite (Finite)
 import Data.Lattice (
   BoundedLattice,
-  BoundedMeetSemiLattice (..),
+  BoundedJoinSemiLattice (..),
   JoinSemiLattice (..),
   MeetSemiLattice (..),
  )

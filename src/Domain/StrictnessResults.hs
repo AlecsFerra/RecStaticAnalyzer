@@ -3,7 +3,7 @@
 module Domain.StrictnessResults (
   StrictnessResults (..),
   ArgumentStrictness (..),
-  makeResults,
+  makeStrictnessResults,
 ) where
 
 import Analysis.Analysis (AnalysisResults (AnalysisResults))
@@ -20,8 +20,8 @@ newtype StrictnessResults = StrictnessResults [(FunctionIdentifier, ArgumentStri
 newtype ArgumentStrictness = ArgumentStrictness [(VariableIdentifier, Strictness)]
   deriving (Show)
 
-makeResults :: AnalysisResults Strictness -> StrictnessResults
-makeResults (AnalysisResults res) = StrictnessResults $ fmap (second makeResult) res
+makeStrictnessResults :: AnalysisResults Strictness -> StrictnessResults
+makeStrictnessResults (AnalysisResults res) = StrictnessResults $ fmap (second makeResult) res
 
 makeResult :: FunctionSemantics VariableIdentifier Strictness -> ArgumentStrictness
 makeResult (FunctionSemantics args sem) = ArgumentStrictness $ fmap (makeArg args sem) args

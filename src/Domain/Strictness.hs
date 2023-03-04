@@ -40,14 +40,14 @@ instance MeetSemiLattice Strictness where
   _ /\ _ = Strict
 
 instance BoundedMeetSemiLattice Strictness where
-  bottom = Strict
+  top = Lazy
 
 instance JoinSemiLattice Strictness where
   Strict \/ Strict = Strict
   _ \/ _ = Lazy
 
 instance BoundedJoinSemiLattice Strictness where
-  top = Lazy
+  bottom = Strict
 
 instance Lattice Strictness
 

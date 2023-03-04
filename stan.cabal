@@ -31,6 +31,8 @@ library
       Data.Lattice
       Data.Poset
       Data.ValueSemantics
+      Domain.Sign
+      Domain.SignResults
       Domain.Strictness
       Domain.StrictnessResults
       Environment
@@ -61,20 +63,6 @@ executable stan-exe
       Paths_stan
   hs-source-dirs:
       app
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-name-shadowing -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , containers
-    , stan
-  default-language: Haskell2010
-
-test-suite stan-test
-  type: exitcode-stdio-1.0
-  main-is: Spec.hs
-  other-modules:
-      Paths_stan
-  hs-source-dirs:
-      test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-name-shadowing -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
