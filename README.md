@@ -35,7 +35,7 @@ The implementation is based on the description given by [Mycroft: "The theory an
 ### Sign analysis
 The interpreter leverages the extended sign domain
 
-![image](https://user-images.githubusercontent.com/35380179/222896464-2d54d70d-e7d9-45e6-b76a-d77753f87642.png)
+![image](https://user-images.githubusercontent.com/35380179/222907539-0b832f86-4f66-4710-9749-0d4a593f694d.png)
 
 The implementation is based on the description given by [Antoine Miné - Static Inference of Numeric Invariants by Abstract Interpretation](https://doi.org/10.1561/2500000034).
 
