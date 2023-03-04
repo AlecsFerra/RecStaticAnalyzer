@@ -1,6 +1,7 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 
 module Parsing.Parser.Parser (parse, ParsingError (..)) where
 
@@ -11,7 +12,7 @@ import GHC.Base (Applicative (..))
 import Parsing.Lexer.Token (Token (..))
 import Parsing.Parser.Syntax (Declaration (..), Expression (..), Operator (..), Program (..))
 import Parsing.ParserCombinator (FromStream (..), pluck, satisfies)
-import qualified Parsing.ParserCombinator as P (Parser (..))
+import Parsing.ParserCombinator qualified as P (Parser (..))
 
 data ParsingError
   = Unexpected Token
@@ -50,7 +51,11 @@ additionSubtraction = assocL parse multiplication
       <|> BinaryOperator Subtraction <$ is Dash
 
 multiplication :: Parser Expression
-multiplication = assocL (BinaryOperator Multiplication <$ is Star) negation
+multiplication = assocL parse negation
+ where
+  parse =
+    BinaryOperator Multiplication <$ is Star
+      <|> BinaryOperator Division <$ is Slash
 
 negation :: Parser Expression
 negation = neg <|> pos <|> application

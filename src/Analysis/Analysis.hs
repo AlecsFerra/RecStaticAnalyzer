@@ -39,7 +39,7 @@ newtype AnalysisResults l
       [(FunctionIdentifier, FunctionSemantics VariableIdentifier l)]
 
 run :: forall l. (BoundedLattice l, Finite l) => ValueSemantics l -> Program -> AnalysisResults l
-run (ValueSemantics literal (*#) (+#) cond) (Program definitions) = results $ fix step bottomFenv
+run (ValueSemantics literal (*#) (+#) (/#) cond) (Program definitions) = results $ fix step bottomFenv
  where
   fix :: Eq e => (e -> e) -> e -> e
   fix f bottom = fst $ head $ filter (uncurry (==)) $ zip sequence $ tail sequence
@@ -53,6 +53,7 @@ run (ValueSemantics literal (*#) (+#) cond) (Program definitions) = results $ fi
     semantics' (Literal n) = literal n
     semantics' (Addition l r) = semantics' l +# semantics' r
     semantics' (Multiplication l r) = semantics' l *# semantics' r
+    semantics' (Division l r) = semantics' l /# semantics' r
     semantics' (Conditional guard thenClause elseClause) =
       (thenGuard /\ semantics fenv thenClause thenEnv)
         \/ (elseGuard /\ semantics fenv elseClause elseEnv)

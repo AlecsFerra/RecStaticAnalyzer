@@ -8,5 +8,6 @@ data ValueSemantics l = ValueSemantics
     { literal :: Integer -> l
     , (*#) :: l -> l -> l
     , (+#) :: l -> l -> l
+    , (/#) :: l -> l -> l
     , cond :: l -> Expression -> Env l -> (l, l, Env l, Env l)
     }

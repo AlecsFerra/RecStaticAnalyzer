@@ -57,6 +57,7 @@ checkExpression fenv env = checkExpression'
       *> checkExpression' elseBranch
   checkExpression' (Addition l r) = checkExpression' l *> checkExpression' r
   checkExpression' (Multiplication l r) = checkExpression' l *> checkExpression' r
+  checkExpression' (Division l r) = checkExpression' l *> checkExpression' r
   checkExpression' (Application id args) = do
     forM_ args checkExpression'
     arity <- note (UnknownFunction id) $ lookup id fenv

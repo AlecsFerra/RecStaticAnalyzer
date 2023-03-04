@@ -1,6 +1,6 @@
 module Parsing.Parser.Syntax (Program (..), Expression (..), Operator (..), Declaration (..)) where
 
-data Operator = Addition | Subtraction | Multiplication
+data Operator = Addition | Subtraction | Multiplication | Division
   deriving (Show)
 
 data Expression

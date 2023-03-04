@@ -41,6 +41,7 @@ operator =
   Plus `with` string "+"
     <|> Dash `with` string "-"
     <|> Star `with` string "*"
+    <|> Slash `with` string "/"
     <|> OpenParen `with` string "("
     <|> CloseParen `with` string ")"
     <|> Comma `with` string ","

@@ -15,6 +15,7 @@ import Data.Poset (Poset (..))
 import Data.ValueSemantics (ValueSemantics (..))
 import Environment (Environment, insert)
 import Language.Syntax (Expression (Variable), VariableIdentifier)
+import Prelude hiding (div)
 
 data Sign
     = Bottom
@@ -142,6 +143,7 @@ signValueSemantics =
         { literal = literal'
         , (*#) = mul
         , (+#) = add
+        , (/#) = div
         , cond = cond'
         }
 
@@ -204,6 +206,36 @@ mul GreaterEqZero GreaterZero = GreaterEqZero
 mul GreaterEqZero LowerEqZero = LowerEqZero
 mul GreaterEqZero GreaterEqZero = GreaterEqZero
 mul _ _ = Top
+
+div :: Sign -> Sign -> Sign
+div _ Bottom = Bottom
+div Bottom _ = Bottom
+div _ EqualZero = Bottom
+div EqualZero _ = EqualZero
+div LowerZero LowerZero = GreaterZero
+div LowerZero GreaterZero = LowerZero
+div LowerZero LowerEqZero = GreaterZero
+div LowerZero NonZero = NonZero
+div LowerZero GreaterEqZero = LowerZero
+div GreaterZero LowerZero = LowerZero
+div GreaterZero GreaterZero = GreaterZero
+div GreaterZero LowerEqZero = LowerZero
+div GreaterZero NonZero = NonZero
+div GreaterZero GreaterEqZero = GreaterZero
+div LowerEqZero LowerZero = GreaterEqZero
+div LowerEqZero GreaterZero = LowerEqZero
+div LowerEqZero LowerEqZero = GreaterEqZero
+div LowerEqZero GreaterEqZero = LowerEqZero
+div NonZero LowerZero = NonZero
+div NonZero GreaterZero = NonZero
+div NonZero LowerEqZero = NonZero
+div NonZero NonZero = NonZero
+div NonZero GreaterEqZero = NonZero
+div GreaterEqZero LowerZero = LowerEqZero
+div GreaterEqZero GreaterZero = GreaterEqZero
+div GreaterEqZero LowerEqZero = LowerEqZero
+div GreaterEqZero GreaterEqZero = GreaterEqZero
+div _ _ = Top
 
 type Env = Environment VariableIdentifier Sign
 cond' :: Sign -> Expression -> Env -> (Sign, Sign, Env, Env)

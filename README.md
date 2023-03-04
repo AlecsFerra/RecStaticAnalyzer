@@ -1,6 +1,6 @@
 # REcSTaticAnalyzer
 
-An abstract interpretation based static analyzer for the REC programming language described in the 9th chapter of the book “The formal semantics of programming languages” by G. Winskel, The MIT Press, 1993..
+An abstract interpretation based static analyzer for the REC programming language (+ division) described in the 9th chapter of the book “The formal semantics of programming languages” by G. Winskel, The MIT Press, 1993..
 
 Supported Analysis:
 - Strictness

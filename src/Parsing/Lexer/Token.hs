@@ -6,6 +6,7 @@ data Token
   | Plus
   | Dash
   | Star
+  | Slash
   | If
   | Then
   | Else

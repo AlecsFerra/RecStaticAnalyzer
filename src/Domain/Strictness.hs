@@ -64,6 +64,7 @@ strictnessValueSemantics =
     { literal = const top
     , (*#) = (/\)
     , (+#) = (/\)
+    , (/#) = (/\)
     , cond = cond'
     }
 

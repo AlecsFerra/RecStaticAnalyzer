@@ -5,3 +5,5 @@ k(x) = if x then x else 0
 zero(x) = if x then x else zero(x - 1)
 
 up(x) = if x then x + 0 else 0
+
+zzzz(x, y) = if x then y / x else 11 / 0

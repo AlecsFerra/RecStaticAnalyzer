@@ -18,6 +18,7 @@ data Expression
   | Variable VariableIdentifier
   | Addition Expression Expression
   | Multiplication Expression Expression
+  | Division Expression Expression
   | Conditional Expression Expression Expression
   | Application FunctionIdentifier [Expression]
   deriving (Show, Eq)

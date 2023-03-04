@@ -32,6 +32,10 @@ compileExpression (P.BinaryOperator P.Multiplication l r) =
   S.Multiplication
     (compileExpression l)
     (compileExpression r)
+compileExpression (P.BinaryOperator P.Division l r) =
+  S.Division
+    (compileExpression l)
+    (compileExpression r)
 compileExpression (P.Negation ex) =
   S.Multiplication
     (S.Literal (-1))
