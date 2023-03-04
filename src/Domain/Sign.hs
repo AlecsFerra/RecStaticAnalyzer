@@ -239,10 +239,10 @@ div _ _ = Top
 
 type Env = Environment VariableIdentifier Sign
 cond' :: Sign -> Expression -> Env -> (Sign, Sign, Env, Env)
+cond' Bottom _ env = (bottom, bottom, env, env)
 cond' EqualZero _ env = (top, bottom, env, env)
 cond' NonZero _ env = (bottom, top, env, env)
 cond' GreaterZero _ env = (bottom, top, env, env)
 cond' LowerZero _ env = (bottom, top, env, env)
 cond' sign (Variable id) env = (top, top, insert id EqualZero env, insert id (sign /\ NonZero) env)
-cond' Bottom _ env = (bottom, bottom, env, env)
 cond' _ _ env = (top, top, env, env)
