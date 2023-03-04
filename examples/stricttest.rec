@@ -1,0 +1,2 @@
+mm(x) = mm(x)
+m(z, x, y) = if (mm(x)) then x else x
