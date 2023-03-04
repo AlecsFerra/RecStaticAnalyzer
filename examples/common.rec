@@ -3,3 +3,5 @@ const(x, y) = x
 flipconst(x, y) = const(y, x)
 
 constapp(y, x) = flipconst(x + y, 10)
+
+f(x) = if x then 0 else x

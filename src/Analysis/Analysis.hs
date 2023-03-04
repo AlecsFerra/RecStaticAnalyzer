@@ -1,4 +1,3 @@
-{-# LANGUAGE AllowAmbiguousTypes #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
 module Analysis.Analysis (run, AnalysisResults (..)) where
@@ -7,8 +6,8 @@ import Analysis.FunctionSemantics (FunctionSemantics (..))
 import Control.Arrow (Arrow (..))
 import Data.Finite (Finite)
 import Data.Lattice (
-  BoundedLattice,
   BoundedJoinSemiLattice (..),
+  BoundedLattice,
   JoinSemiLattice (..),
   MeetSemiLattice (..),
  )
@@ -40,7 +39,7 @@ newtype AnalysisResults l
       [(FunctionIdentifier, FunctionSemantics VariableIdentifier l)]
 
 run :: forall l. (BoundedLattice l, Finite l) => ValueSemantics l -> Program -> AnalysisResults l
-run (ValueSemantics literal (*#) (+#)) (Program definitions) = results $ fix step bottomFenv
+run (ValueSemantics literal (*#) (+#) cond) (Program definitions) = results $ fix step bottomFenv
  where
   fix :: Eq e => (e -> e) -> e -> e
   fix f bottom = fst $ head $ filter (uncurry (==)) $ zip sequence $ tail sequence
@@ -55,7 +54,10 @@ run (ValueSemantics literal (*#) (+#)) (Program definitions) = results $ fix ste
     semantics' (Addition l r) = semantics' l +# semantics' r
     semantics' (Multiplication l r) = semantics' l *# semantics' r
     semantics' (Conditional guard thenClause elseClause) =
-      semantics' guard /\ (semantics' thenClause \/ semantics' elseClause)
+      (thenGuard /\ semantics fenv thenClause thenEnv)
+        \/ (elseGuard /\ semantics fenv elseClause elseEnv)
+     where
+      (thenGuard, elseGuard, thenEnv, elseEnv) = cond (semantics' guard) guard env
     semantics' (Application id args) =
       let args' = fmap semantics' args
           (Function (FunctionSemantics argNames functional) _) = lookup id fenv

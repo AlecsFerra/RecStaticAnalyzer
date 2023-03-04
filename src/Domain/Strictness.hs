@@ -17,6 +17,8 @@ import Data.Lattice (
  )
 import Data.Poset (Poset (..))
 import Data.ValueSemantics (ValueSemantics (..))
+import Language.Syntax (Expression, VariableIdentifier)
+import Environment (Environment)
 
 -- | Two point latice describing the strictness
 data Strictness
@@ -62,4 +64,9 @@ strictnessValueSemantics =
     { literal = const top
     , (*#) = (/\)
     , (+#) = (/\)
+    , cond = cond'
     }
+
+type Env = Environment VariableIdentifier Strictness
+cond' :: Strictness -> Expression -> Env -> (Strictness, Strictness, Env, Env)
+cond' s _ e = (s, s, e, e)

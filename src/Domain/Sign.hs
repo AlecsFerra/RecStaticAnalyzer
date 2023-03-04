@@ -13,6 +13,8 @@ import Data.Lattice (
  )
 import Data.Poset (Poset (..))
 import Data.ValueSemantics (ValueSemantics (..))
+import Environment (Environment, insert)
+import Language.Syntax (Expression (Variable), VariableIdentifier)
 
 data Sign
     = Bottom
@@ -23,6 +25,8 @@ data Sign
     | LowerZero
     | LowerEqZero
     | Top
+
+deriving instance Show Sign
 
 deriving instance Eq Sign
 
@@ -138,6 +142,7 @@ signValueSemantics =
         { literal = literal'
         , (*#) = mul
         , (+#) = add
+        , cond = cond'
         }
 
 literal' :: Integer -> Sign
@@ -199,3 +204,12 @@ mul GreaterEqZero GreaterZero = GreaterEqZero
 mul GreaterEqZero LowerEqZero = LowerEqZero
 mul GreaterEqZero GreaterEqZero = GreaterEqZero
 mul _ _ = Top
+
+type Env = Environment VariableIdentifier Sign
+cond' :: Sign -> Expression -> Env -> (Sign, Sign, Env, Env)
+cond' EqualZero _ env = (top, bottom, env, env)
+cond' NonZero _ env = (bottom, top, env, env)
+cond' GreaterZero _ env = (bottom, top, env, env)
+cond' LowerZero _ env = (bottom, top, env, env)
+cond' sign (Variable id) env = (top, top, insert id EqualZero env, insert id (sign /\ NonZero) env)
+cond' _ _ env = (top, top, env, env)

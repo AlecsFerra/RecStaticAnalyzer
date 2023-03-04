@@ -14,9 +14,24 @@ module Environment (
 where
 
 import Control.Arrow (Arrow (..))
-import Data.Lattice (BoundedJoinSemiLattice (..), BoundedLattice, BoundedMeetSemiLattice (..), JoinSemiLattice (..), Lattice, MeetSemiLattice (..))
+import Data.Lattice (
+    BoundedJoinSemiLattice (..),
+    BoundedLattice,
+    BoundedMeetSemiLattice (..),
+    JoinSemiLattice (..),
+    Lattice,
+    MeetSemiLattice (..),
+ )
 import Data.List (nub)
-import Data.Map qualified as M (Map, delete, empty, fromList, insert, keys, lookup)
+import Data.Map qualified as M (
+    Map,
+    delete,
+    empty,
+    fromList,
+    insert,
+    keys,
+    lookup,
+ )
 import Data.Maybe (fromMaybe)
 import Data.Poset (Poset (..))
 import Prelude hiding (lookup, (*), (<=))

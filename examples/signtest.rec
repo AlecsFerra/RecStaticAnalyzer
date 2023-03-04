@@ -1,0 +1,7 @@
+g(p, q, r) = if 1 then 12 else -2
+
+k(x) = if x then x else 0
+
+zero(x) = if x then x else zero(x - 1)
+
+up(x) = if x then x + 0 else 0
