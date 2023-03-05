@@ -31,6 +31,7 @@ library
       Data.Lattice
       Data.Poset
       Data.ValueSemantics
+      Domain.BoundedInterval
       Domain.Sign
       Domain.SignResults
       Domain.Strictness
