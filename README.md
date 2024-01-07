@@ -1,13 +1,14 @@
 # REcSTaticAnalyzer
 
-An abstract interpretation based static analyzer for the REC programming language (+ division) described in the 9th chapter of the book “The formal semantics of programming languages” by G. Winskel, The MIT Press, 1993..
+An abstract interpretation-based static analyzer for the REC programming language (which includes division) is detailed in the 9th chapter of the book “The Formal Semantics of Programming Languages” by G. Winskel, published by The MIT Press in 1993.
 
-Supported Analysis:
+## Supported Analysis:
 - Strictness
 - Sign
 
 ## Usage
-### Building the project (using stack)
+
+### Building the Project (Using Stack)
 
 ```
 stack build
@@ -23,12 +24,16 @@ stan-exe path/to/src --type
 ```
 Where `type` is the name of the analysis to perform
 
-## Types of analysis
-### Stricntess analysis
-The interpreter leverages a 2 point lattice (`Strict ≥ Lazy`) (isomorphic to the boolean lattice) obviously is an approximation.
+## Types of Analysis
 
-A parameter is said strict when we have that `pₖ = ⊥ ⇒ f p₁ ... pₙ ... pₖ  = ⊥  ∀ p₁ ... pₖ`.
-When a parameter is strict is safe to perform his evaluation before the call to the function f thus making the interpretation of the program more efficient.
+### Strictness Analysis
+
+The interpreter employs a two-point lattice (`Strict ≥ Lazy`), which is isomorphic to the Boolean lattice. This serves as an approximation.
+
+A parameter is deemed strict if:
+`pₖ = ⊥ ⇒ f p₁ ... pₙ ... pₖ  = ⊥  ∀ p₁ ... pₖ`.
+
+Evaluating such parameters before invoking the function `f` enhances program interpretation efficiency.
 
 The implementation is based on the description given by [Mycroft: "The theory and practice of transforming call-by-need into call-by-value"](https://doi.org/10.1007/3-540-09981-6_19) and [Clack, Peyton Jones: "Strictness analysis — a practical approach"](https://doi.org/10.1007/3-540-15975-4_28).
 
